@@ -32,6 +32,13 @@ pub fn init_connect() -> Flex<AppData> {
 
     let scroll = Scroll::<Vector<Broker>, List<Broker>>::new(list);
 
-    let flex = Flex::row().cross_axis_alignment(CrossAxisAlignment::Start);
-    flex.with_child(scroll.vertical().lens(AppData::brokers).fix_height(200.0))
+    let buttons = Flex::row()
+        .cross_axis_alignment(CrossAxisAlignment::Start)
+        .with_child(Button::new("增"))
+        .with_child(Button::new("删"))
+        .with_child(Button::new("复制"));
+
+    let flex = Flex::column().cross_axis_alignment(CrossAxisAlignment::Start);
+    flex.with_child(buttons)
+        .with_child(scroll.vertical().lens(AppData::brokers).fix_height(200.0))
 }
