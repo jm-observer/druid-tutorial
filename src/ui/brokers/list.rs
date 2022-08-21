@@ -15,7 +15,7 @@ pub fn init_connect() -> Flex<AppData> {
             .expand()
             .height(50.0)
             .fix_width(120f64)
-            .background(Color::rgb(0.5, 0.5, 0.5))
+        // .background(Color::rgb(0.5, 0.5, 0.5))
     };
     let addr = || {
         Label::dynamic(|data: &Broker, _: &Env| format!("{}:{}", data.addr, data.port))
@@ -23,7 +23,7 @@ pub fn init_connect() -> Flex<AppData> {
             .padding(10.0)
             .expand()
             .height(50.0)
-            .background(Color::rgb(0.5, 0.5, 0.5))
+            // .background(Color::rgb(0.5, 0.5, 0.5))
             .fix_width(120f64)
     };
 
@@ -39,6 +39,13 @@ pub fn init_connect() -> Flex<AppData> {
         .with_child(Button::new("复制"));
 
     let flex = Flex::column().cross_axis_alignment(CrossAxisAlignment::Start);
-    flex.with_child(buttons)
-        .with_child(scroll.vertical().lens(AppData::brokers).fix_height(200.0))
+    let flex = flex.with_child(buttons).with_child(
+        scroll
+            .vertical()
+            .lens(AppData::brokers)
+            .fix_height(200.0)
+            .fix_width(300.0),
+    );
+    // println!("{}", flex.);
+    flex
 }

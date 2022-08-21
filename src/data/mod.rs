@@ -4,6 +4,7 @@ use druid::{Data, Lens};
 #[derive(Debug, Clone, Data, Lens)]
 pub struct AppData {
     pub brokers: Vector<Broker>,
+    pub text: String,
 }
 #[derive(Debug, Clone, Data, Lens)]
 pub struct Broker {
@@ -25,6 +26,9 @@ impl Default for AppData {
             port: 8000,
         };
         let brokers = vector![b0, b1];
-        Self { brokers }
+        Self {
+            brokers,
+            text: "".to_string(),
+        }
     }
 }
