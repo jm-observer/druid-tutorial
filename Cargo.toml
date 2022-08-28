@@ -6,8 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-#druid = { git = "https://github.com/linebender/druid.git", features = ["im"] }
-druid = { git = "https://github.com/lapce/druid", branch = "shell_opengl", features = [ "svg", "im", "serde", ] }
-custom-utils = "0.10.2"
+druid = { git = "https://github.com/linebender/druid.git", features = ["im"] }
+#druid = { git = "https://github.com/lapce/druid", branch = "shell_opengl", features = [ "svg", "im", "serde", ] }
+custom-utils = "0.10.3"
 log = "0.4.17"
 
+uuid = { version = "1.1.2", features = ["v4"] }

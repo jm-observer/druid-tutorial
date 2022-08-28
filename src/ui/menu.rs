@@ -1,5 +1,5 @@
 use crate::data::AppData;
-use druid::{Env, LocalizedString, Menu, WindowId};
+use druid::{Env, Menu, WindowId};
 
 pub fn menu(_: Option<WindowId>, state: &AppData, _: &Env) -> Menu<AppData> {
     let mut base = Menu::empty();

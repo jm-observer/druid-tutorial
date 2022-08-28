@@ -7,8 +7,7 @@ use druid_tutorial::ui::menu::menu;
 
 fn main() -> Result<(), PlatformError> {
     let win = WindowDesc::new(init_layout()).menu(menu);
-    AppLauncher::new()
-        .with_window(win)
+    AppLauncher::with_window(win)
         // .with_window(win)
         .launch(AppData::default())?;
     Ok(())

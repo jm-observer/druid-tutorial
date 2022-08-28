@@ -1,9 +1,8 @@
-use crate::data::{AppData, Broker};
+use crate::data::{AppData, Broker, BrokerTab, DynamicTabData};
 use druid::im::Vector;
-use druid::lens::{Identity, Map, Then};
-use druid::widget::{Button, CrossAxisAlignment, Flex, Label, LensWrap, List, Scroll, SizedBox};
-use druid::{lens, Color, UnitPoint, WidgetExt};
-use druid::{Env, LensExt};
+use druid::widget::{Button, CrossAxisAlignment, Flex, Label, List, Scroll};
+use druid::{theme, Color, Env, Widget};
+use druid::{UnitPoint, WidgetExt};
 
 pub fn init() {}
 
@@ -34,9 +33,18 @@ pub fn init_connect() -> Flex<AppData> {
 
     let buttons = Flex::row()
         .cross_axis_alignment(CrossAxisAlignment::Start)
-        .with_child(Button::new("增"))
+        .with_child(
+            Label::new("新增")
+                .with_text_size(12.)
+                .border(Color::WHITE, 10.)
+                .on_click(move |_ctx, data: &mut DynamicTabData, _env| {
+                    data.add_tab(BrokerTab::default());
+                }),
+        )
         .with_child(Button::new("删"))
-        .with_child(Button::new("复制"));
+        .with_child(Button::new("复制"))
+        .background(theme::PLACEHOLDER_COLOR)
+        .lens(AppData::tabs);
 
     let flex = Flex::column().cross_axis_alignment(CrossAxisAlignment::Start);
     let flex = flex.with_child(buttons).with_child(
@@ -46,6 +54,5 @@ pub fn init_connect() -> Flex<AppData> {
             .fix_height(200.0)
             .fix_width(300.0),
     );
-    // println!("{}", flex.);
     flex
 }
