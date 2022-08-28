@@ -1,10 +1,9 @@
-use crate::data::{AppData, BrokerTab};
+use crate::data::BrokerTab;
 use druid::widget::{Flex, Label, TextBox};
-use druid::{Widget, WidgetExt};
+use druid::WidgetExt;
 
 //
 pub fn init_connection() -> Flex<BrokerTab> {
-    // client_id/url/port/params
     Flex::column()
         .with_child(
             Flex::row()

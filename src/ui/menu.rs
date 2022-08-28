@@ -1,7 +1,7 @@
 use crate::data::AppData;
 use druid::{Env, Menu, WindowId};
 
-pub fn menu(_: Option<WindowId>, state: &AppData, _: &Env) -> Menu<AppData> {
+pub fn menu(_: Option<WindowId>, _state: &AppData, _: &Env) -> Menu<AppData> {
     let mut base = Menu::empty();
     #[cfg(target_os = "macos")]
     {

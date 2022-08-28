@@ -1,9 +1,9 @@
 use crate::ui::brokers::connections::init_connection;
 use crate::ui::brokers::contents::init_content;
 use druid::im::{vector, HashMap, Vector};
-use druid::widget::{Axis, Flex, Label, TabInfo, Tabs, TabsEdge, TabsPolicy, TabsTransition};
-use druid::{Data, Lens, Widget, WidgetExt};
-use log::warn;
+use druid::widget::{Flex, Label, TabInfo, TabsPolicy};
+use druid::{Data, Lens};
+use log::debug;
 use std::hash::{Hash, Hasher};
 
 #[derive(Debug, Clone, Data, Lens)]
@@ -116,6 +116,7 @@ impl TabsPolicy for NumberedTabs {
     type BodyWidget = Label<DynamicTabData>;
 
     fn tabs_changed(&self, old_data: &DynamicTabData, data: &DynamicTabData) -> bool {
+        debug!("*********");
         old_data == data
     }
 
@@ -131,7 +132,7 @@ impl TabsPolicy for NumberedTabs {
         TabInfo::new(format!("Tab {:?}", key), true)
     }
 
-    fn tab_body(&self, key: Self::Key, _data: &DynamicTabData) -> Label<DynamicTabData> {
+    fn tab_body(&self, _key: Self::Key, _data: &DynamicTabData) -> Label<DynamicTabData> {
         // Tabs::for_policy(BrokerTab)
         //     .with_axis(Axis::Horizontal)
         //     .with_edge(TabsEdge::Leading)
@@ -196,7 +197,7 @@ impl TabsPolicy for BrokerTab {
         }
     }
 
-    fn close_tab(&self, key: Self::Key, data: &mut BrokerTab) {
+    fn close_tab(&self, _key: Self::Key, _data: &mut BrokerTab) {
         todo!()
         // if let Some(idx) = data.tab_labels.index_of(&key) {
         //     data.remove_tab(idx)
@@ -215,8 +216,6 @@ impl TabsPolicy for BrokerTab {
 
 #[derive(Data, Clone, Lens, Debug, Hash, Eq, PartialEq)]
 pub struct DynamicTabData {
-    // key: usize,
-    // tab_labels: Vector<BrokerTab>,
     tab_labels: HashMap<String, BrokerTab>,
 }
 

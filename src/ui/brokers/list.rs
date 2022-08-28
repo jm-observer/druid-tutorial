@@ -1,10 +1,9 @@
 use crate::data::{AppData, Broker, BrokerTab, DynamicTabData};
 use druid::im::Vector;
 use druid::widget::{Button, CrossAxisAlignment, Flex, Label, List, Scroll};
-use druid::{theme, Color, Env, Widget};
+use druid::{theme, Color, Env};
 use druid::{UnitPoint, WidgetExt};
-
-pub fn init() {}
+use log::debug;
 
 pub fn init_connect() -> Flex<AppData> {
     let name = || {
@@ -14,7 +13,6 @@ pub fn init_connect() -> Flex<AppData> {
             .expand()
             .height(50.0)
             .fix_width(120f64)
-        // .background(Color::rgb(0.5, 0.5, 0.5))
     };
     let addr = || {
         Label::dynamic(|data: &Broker, _: &Env| format!("{}:{}", data.addr, data.port))
@@ -22,7 +20,6 @@ pub fn init_connect() -> Flex<AppData> {
             .padding(10.0)
             .expand()
             .height(50.0)
-            // .background(Color::rgb(0.5, 0.5, 0.5))
             .fix_width(120f64)
     };
 
@@ -36,12 +33,18 @@ pub fn init_connect() -> Flex<AppData> {
         .with_child(
             Label::new("新增")
                 .with_text_size(12.)
-                .border(Color::WHITE, 10.)
+                // .border(Color::WHITE, 10.)
                 .on_click(move |_ctx, data: &mut DynamicTabData, _env| {
+                    debug!("AAAAAAAA");
                     data.add_tab(BrokerTab::default());
                 }),
         )
-        .with_child(Button::new("删"))
+        .with_child(
+            Button::new("删").on_click(move |_ctx, data: &mut DynamicTabData, _env| {
+                debug!("AAAAAAAA");
+                data.add_tab(BrokerTab::default());
+            }),
+        )
         .with_child(Button::new("复制"))
         .background(theme::PLACEHOLDER_COLOR)
         .lens(AppData::tabs);

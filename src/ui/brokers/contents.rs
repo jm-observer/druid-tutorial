@@ -1,6 +1,6 @@
-use crate::data::{AppData, BrokerTab};
+use crate::data::BrokerTab;
 use druid::widget::{Align, Container, Flex, Label, Padding, Split};
-use druid::{Color, Widget};
+use druid::Color;
 
 pub fn init_content() -> Flex<BrokerTab> {
     let topic_type = Padding::new(
