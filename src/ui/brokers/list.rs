@@ -1,7 +1,7 @@
 use crate::data::{AppData, Broker, BrokerTab, DynamicTabData};
 use druid::im::Vector;
 use druid::widget::{Button, CrossAxisAlignment, Flex, Label, List, Scroll};
-use druid::{theme, Color, Env};
+use druid::{theme, Env};
 use druid::{UnitPoint, WidgetExt};
 use log::debug;
 
@@ -36,15 +36,11 @@ pub fn init_connect() -> Flex<AppData> {
                 // .border(Color::WHITE, 10.)
                 .on_click(move |_ctx, data: &mut DynamicTabData, _env| {
                     debug!("AAAAAAAA");
-                    data.add_tab(BrokerTab::default());
+                    let tab = BrokerTab::default();
+                    data.tab_labels.insert(tab.id.clone(), tab);
                 }),
         )
-        .with_child(
-            Button::new("删").on_click(move |_ctx, data: &mut DynamicTabData, _env| {
-                debug!("AAAAAAAA");
-                data.add_tab(BrokerTab::default());
-            }),
-        )
+        .with_child(Button::new("删"))
         .with_child(Button::new("复制"))
         .background(theme::PLACEHOLDER_COLOR)
         .lens(AppData::tabs);

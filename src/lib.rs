@@ -5,5 +5,6 @@
 // pub mod list_connection;
 // pub mod menu;
 // pub mod windows;
+#![feature(type_alias_impl_trait)]
 pub mod data;
 pub mod ui;
