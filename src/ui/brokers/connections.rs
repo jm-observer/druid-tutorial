@@ -1,10 +1,10 @@
 use crate::data::BrokerTab;
-use druid::widget::{Flex, Label, TextBox};
-use druid::WidgetExt;
+use druid::widget::{Container, Flex, Label, TextBox};
+use druid::{Widget, WidgetExt};
 
 //
-pub fn init_connection() -> Flex<BrokerTab> {
-    Flex::column()
+pub fn init_connection() -> Container<BrokerTab> {
+    let connection = Flex::column()
         .with_child(
             Flex::row()
                 .with_child(Label::new("client id"))
@@ -24,5 +24,6 @@ pub fn init_connection() -> Flex<BrokerTab> {
             Flex::row()
                 .with_child(Label::new("params"))
                 .with_child(TextBox::new().lens(BrokerTab::name)),
-        )
+        );
+    Container::new(connection)
 }

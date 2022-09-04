@@ -1,8 +1,8 @@
 use crate::data::BrokerTab;
 use druid::widget::{Align, Container, Flex, Label, Padding, Split};
-use druid::Color;
+use druid::{Color, Widget, WidgetExt};
 
-pub fn init_content() -> Flex<BrokerTab> {
+pub fn init_content() -> Container<BrokerTab> {
     let topic_type = Padding::new(
         10.0,
         Container::new(
@@ -37,9 +37,6 @@ pub fn init_content() -> Flex<BrokerTab> {
         )
         .border(Color::WHITE, 1.0),
     );
-    Flex::column().with_child(Padding::new(
-        10.0,
-        Container::new(Split::columns(topic, msg).split_point(0.3).bar_size(3.0))
-            .border(Color::WHITE, 1.0),
-    ))
+    Container::new(Split::columns(topic, msg).split_point(0.2).draggable(true))
+    // .debug_paint_layout()
 }

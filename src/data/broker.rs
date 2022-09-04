@@ -2,7 +2,7 @@ use crate::data::{BrokerTab, DynamicTabData};
 use crate::ui::brokers::connections::init_connection;
 use crate::ui::brokers::contents::init_content;
 use druid::widget::{Flex, Label, TabInfo, TabsPolicy};
-use druid::Data;
+use druid::{Data, Widget};
 
 #[derive(Data, Clone)]
 pub struct BrokerTabPolicy;
@@ -17,8 +17,8 @@ impl TabsPolicy for BrokerTabPolicy {
     type Key = TabKind;
     type Build = ();
     type Input = BrokerTab;
-    type LabelWidget = Label<BrokerTab>;
-    type BodyWidget = Flex<BrokerTab>;
+    type LabelWidget = impl Widget<BrokerTab>;
+    type BodyWidget = impl Widget<BrokerTab>;
 
     fn tabs_changed(&self, old_data: &BrokerTab, data: &BrokerTab) -> bool {
         old_data.is_try_connect != data.is_try_connect
@@ -26,9 +26,9 @@ impl TabsPolicy for BrokerTabPolicy {
 
     fn tabs(&self, data: &BrokerTab) -> Vec<Self::Key> {
         let mut keys = Vec::with_capacity(2);
-        if data.is_try_connect {
-            keys.push(TabKind::Connections)
-        }
+        // if data.is_try_connect {
+        keys.push(TabKind::Connections);
+        // }
         keys.push(TabKind::Content);
         keys
     }
@@ -40,11 +40,13 @@ impl TabsPolicy for BrokerTabPolicy {
         }
     }
 
-    fn tab_body(&self, key: Self::Key, _data: &BrokerTab) -> Flex<BrokerTab> {
+    fn tab_body(&self, key: Self::Key, _data: &BrokerTab) -> Self::BodyWidget {
         match key {
-            TabKind::Connections => init_connection(),
-            TabKind::Content => init_content(),
+            TabKind::Connections => init_content(),
+            // TabKind::Content => init_connection(),
+            TabKind::Content => init_connection(),
         }
+        // init_content()
     }
 
     fn close_tab(&self, _key: Self::Key, _data: &mut BrokerTab) {
