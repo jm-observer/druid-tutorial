@@ -1,11 +1,5 @@
-#![feature(prelude_import)]
-
-#[prelude_import]
-use std::prelude::rust_2021::*;
-#[macro_use]
-extern crate std;
+#![allow(dead_code)]
 use druid::im::HashMap;
-use druid::Lens;
 fn main() {}
 struct AppData {
     b: HashMap<String, String>,

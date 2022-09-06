@@ -1,5 +1,5 @@
 use druid::{AppLauncher, PlatformError, WindowDesc};
-use druid_tutorial::data::AppData;
+use druid_tutorial::data::hierarchy::AppData;
 use druid_tutorial::ui::layout::init_layout;
 use druid_tutorial::ui::menu::menu;
 

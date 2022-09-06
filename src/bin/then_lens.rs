@@ -1,5 +1,5 @@
 use druid::widget::Slider;
-use druid::widget::{CrossAxisAlignment, Flex, Label, TextBox};
+use druid::widget::{CrossAxisAlignment, Flex, Label};
 use druid::LensExt;
 use druid::{AppLauncher, Data, Env, Lens, LocalizedString, Widget, WidgetExt, WindowDesc};
 

@@ -1,4 +1,5 @@
-use crate::data::{AppData, NumberedTabs};
+use crate::data::common::impl_tab::NumberedTabs;
+use crate::data::hierarchy::AppData;
 use druid::widget::{Axis, Tabs, TabsEdge, TabsTransition};
 use druid::{Widget, WidgetExt};
 

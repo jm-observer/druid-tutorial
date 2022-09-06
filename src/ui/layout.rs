@@ -1,4 +1,4 @@
-use crate::data::AppData;
+use crate::data::hierarchy::AppData;
 use crate::ui::brokers::list::init_connect;
 use crate::ui::brokers::tabs::init_tabs;
 use druid::widget::{Container, Padding, Split};

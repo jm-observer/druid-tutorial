@@ -1,4 +1,4 @@
-use crate::data::AppData;
+use crate::data::hierarchy::AppData;
 use druid::{Env, Menu, WindowId};
 
 pub fn menu(_: Option<WindowId>, _state: &AppData, _: &Env) -> Menu<AppData> {

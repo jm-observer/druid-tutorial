@@ -1,4 +1,4 @@
-use crate::data::BrokerTab;
+use crate::data::common::brokers::BrokerTab;
 use druid::widget::{Align, Container, Flex, Label, Padding, Split};
 use druid::{Color, Widget, WidgetExt};
 
