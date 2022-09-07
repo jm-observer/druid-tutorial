@@ -1,27 +1,33 @@
 use crate::data::common::brokers::Qos;
-use druid::Data;
+use druid::{Data, Lens};
 
-#[derive(Data, Clone)]
+#[derive(Data, Clone, Debug, Eq, PartialEq)]
 pub struct SubscribeMsg {
-    topic: String,
-    msg: String,
-    qos: Qos,
+    pub topic: String,
+    pub msg: String,
+    pub qos: Qos,
 }
 
-#[derive(Data, Clone)]
+#[derive(Data, Clone, Debug, Eq, PartialEq)]
 pub struct SubscribeTopic {
-    topic: String,
-    qos: Qos,
-    status: SubscribeStatus,
+    pub topic: String,
+    pub qos: Qos,
+    pub status: SubscribeStatus,
 }
-#[derive(Data, Debug, Clone)]
+#[derive(Data, Debug, Clone, Eq, PartialEq, Lens)]
 pub struct SubscribeHis {
-    topic: String,
-    qos: Qos,
+    pub(crate) topic: String,
+    pub(crate) qos: Qos,
 }
 #[derive(Data, Debug, Clone, Eq, PartialEq)]
 pub enum SubscribeStatus {
     Ing,
     Success,
     Fail,
+}
+
+#[derive(Data, Debug, Clone, Eq, PartialEq, Lens)]
+pub struct SubscribeInput {
+    pub(crate) topic: String,
+    pub(crate) qos: String,
 }

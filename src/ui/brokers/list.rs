@@ -1,4 +1,5 @@
-use crate::data::common::brokers::{Broker, BrokerTab, DynamicTabData};
+use crate::data::common::brokers::Broker;
+use crate::data::hierarchy::broker_detail::{BrokerTab, DynamicTabData};
 use crate::data::hierarchy::AppData;
 use druid::im::Vector;
 use druid::widget::{Button, CrossAxisAlignment, Flex, Label, List, Scroll};

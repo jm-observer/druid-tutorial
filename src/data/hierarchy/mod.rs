@@ -2,7 +2,8 @@ pub mod broker_detail;
 pub mod connection;
 pub mod impls;
 
-use crate::data::common::brokers::{Broker, DynamicTabData};
+use crate::data::common::brokers::Broker;
+use crate::data::hierarchy::broker_detail::DynamicTabData;
 use crate::ui::brokers::connections::init_connection;
 use crate::ui::brokers::contents::init_content;
 use druid::im::{vector, HashMap, Vector};
@@ -20,6 +21,4 @@ use std::ops;
 pub struct AppData {
     pub brokers: Vector<Broker>,
     pub tabs: DynamicTabData,
-    pub text: String,
-    pub tabs_size: usize,
 }

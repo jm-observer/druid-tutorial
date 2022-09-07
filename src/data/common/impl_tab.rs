@@ -1,4 +1,5 @@
-use crate::data::common::brokers::{BrokerTab, DynamicTabData, TabKind};
+use crate::data::common::brokers::TabKind;
+use crate::data::hierarchy::broker_detail::{BrokerTab, DynamicTabData};
 use crate::ui::brokers::connections::init_connection;
 use crate::ui::brokers::contents::init_content;
 use druid::widget::{Axis, Label, TabInfo, Tabs, TabsEdge, TabsPolicy, TabsTransition};
@@ -112,9 +113,9 @@ impl TabsPolicy for BrokerTabPolicy {
 
     fn tabs(&self, data: &BrokerTab) -> Vec<Self::Key> {
         let mut keys = Vec::with_capacity(2);
-        // if data.is_try_connect {
-        keys.push(TabKind::Connections);
-        // }
+        if data.is_try_connect {
+            keys.push(TabKind::Connections);
+        }
         keys.push(TabKind::Content);
         keys
     }
