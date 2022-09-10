@@ -3,6 +3,7 @@ pub mod connection;
 pub mod impls;
 
 use crate::data::common::brokers::Broker;
+use crate::data::db::ArcDb;
 use crate::data::hierarchy::broker_detail::DynamicTabData;
 use crate::ui::brokers::connections::init_connection;
 use crate::ui::brokers::contents::init_content;
@@ -14,11 +15,16 @@ use druid::widget::{
 use druid::{Data, Lens, WidgetExt};
 use druid::{LensExt, Widget};
 use log::debug;
+use std::cell::RefCell;
 use std::hash::{Hash, Hasher};
 use std::ops;
+use std::rc::Rc;
 
-#[derive(Debug, Clone, Data, Lens)]
+#[derive(Debug, Clone, Lens, Data)]
 pub struct AppData {
     pub brokers: Vector<Broker>,
     pub tabs: DynamicTabData,
+    #[data(ignore)]
+    #[lens(ignore)]
+    pub db: ArcDb,
 }

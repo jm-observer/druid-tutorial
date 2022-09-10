@@ -5,14 +5,14 @@ use druid::im::{HashMap, Vector};
 use druid::widget::{Flex, Label, TabInfo, TabsPolicy};
 use druid::Lens;
 use druid::{Data, Widget};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Data, Lens)]
+#[derive(Debug, Clone, Data, Lens, Serialize, Deserialize)]
 pub struct Broker {
     pub id: String,
-    pub(crate) name: String,
-    pub(crate) addr: String,
-    pub(crate) port: u16,
-    pub subscribe_his: Vector<SubscribeHis>,
+    pub name: String,
+    pub addr: String,
+    pub port: String,
 }
 
 #[derive(Data, Clone, Copy, Eq, PartialEq, Debug, Hash)]

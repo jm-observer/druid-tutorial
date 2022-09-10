@@ -1,33 +1,41 @@
-use crate::data::common::brokers::Qos;
+use crate::data::common::brokers::{Broker, Qos};
 use crate::data::common::publics::{PublicMsg, PublicMsgInput};
 use crate::data::common::subscribes::{SubscribeHis, SubscribeInput, SubscribeMsg, SubscribeTopic};
+use crate::data::db::ArcDb;
 use druid::im::{HashMap, Vector};
 use druid::Data;
 use druid::Lens;
+use std::cell::RefCell;
+use std::rc::Rc;
 
-#[derive(Data, Clone, Lens, Debug, Hash, Eq, PartialEq)]
+#[derive(Data, Clone, Lens, Debug)]
 pub struct DynamicTabData {
     pub tab_labels: WrapHashMap,
+    #[data(ignore)]
+    #[lens(ignore)]
+    pub db: ArcDb,
 }
 
-#[derive(Data, Clone, Debug, Hash, Eq, PartialEq)]
+#[derive(Data, Clone, Debug, Eq, PartialEq)]
 pub struct WrapHashMap(pub HashMap<String, BrokerTab>);
 
-#[derive(Debug, Clone, Data, Lens, Eq)]
+#[derive(Debug, Clone, Data, Lens)]
 pub struct BrokerTab {
     pub id: String,
     pub is_store: bool,
     pub is_try_connect: bool,
-    pub(crate) client_id: String,
-    pub(crate) name: String,
-    pub(crate) addr: String,
+    pub client_id: String,
+    pub name: String,
+    pub addr: String,
     pub params: String,
-    pub(crate) port: String,
+    pub port: String,
     pub subscribe_topics: SubscribeTopics,
     pub subscribe_hises: SubscribeHises,
     pub msgs: Msgs,
     pub subscribe_ing: SubscribeInput,
     pub public_ing: PublicMsgInput,
+    #[data(ignore)]
+    pub db: ArcDb,
 }
 
 #[derive(Debug, Data, Clone, Eq, PartialEq, Default, Lens)]

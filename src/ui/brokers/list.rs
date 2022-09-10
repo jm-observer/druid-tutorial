@@ -38,7 +38,7 @@ pub fn init_connect() -> Flex<AppData> {
                 // .border(Color::WHITE, 10.)
                 .on_click(move |_ctx, data: &mut DynamicTabData, _env| {
                     debug!("AAAAAAAA");
-                    let tab = BrokerTab::default();
+                    let tab = data.db.new_broker_tab();
                     data.tab_labels.insert(tab.id.clone(), tab);
                 }),
         )

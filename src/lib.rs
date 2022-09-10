@@ -7,5 +7,4 @@
 // pub mod windows;
 #![feature(type_alias_impl_trait)]
 pub mod data;
-pub mod mock;
 pub mod ui;
