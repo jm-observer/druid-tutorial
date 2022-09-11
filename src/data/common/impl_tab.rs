@@ -1,5 +1,6 @@
 use crate::data::common::brokers::TabKind;
 use crate::data::hierarchy::broker_detail::{BrokerTab, DynamicTabData};
+use crate::data::AString;
 use crate::ui::brokers::connections::init_connection;
 use crate::ui::brokers::contents::init_content;
 use druid::widget::{Axis, Label, TabInfo, Tabs, TabsEdge, TabsPolicy, TabsTransition};
@@ -12,7 +13,7 @@ use log::debug;
 pub struct NumberedTabs;
 
 impl TabsPolicy for NumberedTabs {
-    type Key = String;
+    type Key = AString;
     type Build = ();
     type Input = DynamicTabData;
     type LabelWidget = Label<DynamicTabData>;
@@ -24,7 +25,7 @@ impl TabsPolicy for NumberedTabs {
     }
 
     fn tabs(&self, data: &DynamicTabData) -> Vec<Self::Key> {
-        let tabs: Vec<String> = data
+        let tabs: Vec<AString> = data
             .tab_labels
             .0
             .clone()
@@ -39,7 +40,7 @@ impl TabsPolicy for NumberedTabs {
         TabInfo::new(format!("Tab {:?}", key), true)
     }
 
-    fn tab_body(&self, _key: String, _data: &DynamicTabData) -> Self::BodyWidget {
+    fn tab_body(&self, _key: AString, _data: &DynamicTabData) -> Self::BodyWidget {
         debug!("tab_body");
         Tabs::for_policy(BrokerTabPolicy)
             .with_axis(Axis::Horizontal)
@@ -84,7 +85,7 @@ impl TabsPolicy for NumberedTabs {
     }
 
     fn close_tab(&self, key: Self::Key, data: &mut DynamicTabData) {
-        data.tab_labels.remove(&key);
+        data.tab_labels.0.remove(&key);
     }
 
     fn tab_label(

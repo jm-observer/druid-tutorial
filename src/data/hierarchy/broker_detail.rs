@@ -2,6 +2,7 @@ use crate::data::common::brokers::{Broker, Qos};
 use crate::data::common::publics::{PublicMsg, PublicMsgInput};
 use crate::data::common::subscribes::{SubscribeHis, SubscribeInput, SubscribeMsg, SubscribeTopic};
 use crate::data::db::ArcDb;
+use crate::data::AString;
 use druid::im::{HashMap, Vector};
 use druid::Data;
 use druid::Lens;
@@ -17,18 +18,18 @@ pub struct DynamicTabData {
 }
 
 #[derive(Data, Clone, Debug, Eq, PartialEq)]
-pub struct WrapHashMap(pub HashMap<String, BrokerTab>);
+pub struct WrapHashMap(pub HashMap<AString, BrokerTab>);
 
 #[derive(Debug, Clone, Data, Lens)]
 pub struct BrokerTab {
-    pub id: String,
+    pub id: AString,
     pub is_store: bool,
     pub is_try_connect: bool,
-    pub client_id: String,
-    pub name: String,
-    pub addr: String,
-    pub params: String,
-    pub port: String,
+    pub client_id: AString,
+    pub name: AString,
+    pub addr: AString,
+    pub params: AString,
+    pub port: AString,
     pub subscribe_topics: SubscribeTopics,
     pub subscribe_hises: SubscribeHises,
     pub msgs: Msgs,
@@ -65,13 +66,13 @@ impl Msg {
             Msg::Public(msg) => &msg.qos,
         }
     }
-    pub fn msg(&self) -> &String {
+    pub fn msg(&self) -> &AString {
         match self {
             Msg::Subscribe(msg) => &msg.msg,
             Msg::Public(msg) => &msg.msg,
         }
     }
-    pub fn topic(&self) -> &String {
+    pub fn topic(&self) -> &AString {
         match self {
             Msg::Subscribe(msg) => &msg.topic,
             Msg::Public(msg) => &msg.topic,

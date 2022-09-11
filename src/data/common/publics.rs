@@ -1,9 +1,11 @@
 use crate::data::common::brokers::Qos;
+use crate::data::AString;
 use druid::{Data, Lens};
+
 #[derive(Debug, Data, Clone, Eq, PartialEq, Lens)]
 pub struct PublicMsg {
-    pub topic: String,
-    pub msg: String,
+    pub topic: AString,
+    pub msg: AString,
     pub qos: Qos,
     pub status: PublicStatus,
 }
@@ -15,7 +17,7 @@ pub enum PublicStatus {
 
 #[derive(Debug, Data, Clone, Eq, PartialEq, Lens)]
 pub struct PublicMsgInput {
-    pub topic: String,
-    pub msg: String,
-    pub qos: String,
+    pub topic: AString,
+    pub msg: AString,
+    pub qos: AString,
 }

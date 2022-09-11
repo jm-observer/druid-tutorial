@@ -31,6 +31,7 @@ pub fn init_connection() -> Container<BrokerTab> {
             Flex::row().with_child(Label::new("连接").with_text_size(12.).on_click(
                 move |_ctx, data: &mut BrokerTab, _env| {
                     data.is_try_connect = true;
+                    debug!("{:?}", std::thread::current().name());
                     if let Err(e) = data.db.tx.send(AppEvent::Connect(data.id.clone())) {
                         error!("{:?}", e);
                     }

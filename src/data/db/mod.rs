@@ -22,6 +22,7 @@ pub struct ArcDb {
 }
 
 const BROKERS: &[u8; 7] = b"brokers";
+const KEYS: &[u8; 4] = b"keys";
 impl ArcDb {
     pub fn init_db(tx: Sender<AppEvent>) -> Result<Self> {
         let config = Config::new();
@@ -50,14 +51,14 @@ impl ArcDb {
     }
     pub fn new_broker_tab(&self) -> BrokerTab {
         BrokerTab {
-            id: uuid::Uuid::new_v4().to_string(),
+            id: uuid::Uuid::new_v4().to_string().into(),
             is_store: false,
             is_try_connect: false,
-            client_id: "".to_string(),
-            name: "".to_string(),
-            addr: "".to_string(),
-            params: "".to_string(),
-            port: "".to_string(),
+            client_id: "".to_string().into(),
+            name: "".to_string().into(),
+            addr: "".to_string().into(),
+            params: "".to_string().into(),
+            port: "".to_string().into(),
             subscribe_topics: Default::default(),
             subscribe_hises: Default::default(),
             msgs: Default::default(),
